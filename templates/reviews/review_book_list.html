@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  {{book.title}} Reviews
+{% endblock page_title %}
+
+{% block content %}
+<div class="px-5">
+  <h2 class="ml-1 text-4xl text-blue-600">{{book.title}}</h2>
+  <h2 class="ml-1 text-3xl text-blue-600">Reviews</h2>
+ <div class="grid my-5 grid-cols-4 gap-10">
+   <h4 class="ml-1 text-gray-600">Writing</h4>
+  <h4 class="ml-1 text-gray-600">User</h4>
+    <h4 class="ml-1 text-gray-600">Rating</h4>
+    <h4 class="ml-1 text-gray-600">Time</h4>
+ </div>
+	{% for r in reviews %}
+    <div class="grid my-5 grid-cols-4 gap-10">
+    <h4 class="ml-1 text-gray-600">{{r.text}}</h4>
+    <h2 class="ml-10 text-sm text-gray-600">{{r.created_by}}</h2>
+    <h2 class="ml-10 text-sm text-gray-600">{{r.rating}}</h2>
+    <h2 class="ml-10 text-sm text-gray-600">{{r.created_at}}</h2>
+      </div>
+    {%if user.pk == r.created_by.pk%}
+    <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-2 py-2 px-4 rounded w-full" href="{%url 'reviews:remove' r.pk%}">delete review</a>
+    {%endif%}
+	{% endfor %}
+<div class="flex items-center text-center justify-center" >
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{%url 'reviews:book_add' book.pk %}" method="POST" class="w-1/2 mx-auto">
+    {%csrf_token%}
+    <h5>{{form}}</h5>
+  <button class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-2 py-2 px-4 rounded w-full">Submit Review</button>
+  </form>  
+</div>
+{% endblock content %}
