@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 awsebcli = "*"
 freeze = "*"
+pipenv-to-requirements = "*"
 
 [packages]
 Django = "*"
