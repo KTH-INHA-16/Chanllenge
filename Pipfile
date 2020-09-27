@@ -12,6 +12,7 @@ pipenv-to-requirements = "*"
 Django = "*"
 psycopg2 = "*"
 gunicorn = "*"
+django-seed = "*"
 
 [requires]
 python_version = "3.8"
